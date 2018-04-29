@@ -1,7 +1,9 @@
 var express = require('express');
+var bodyParser = require('body-parser')
 
 var app = express();
-app.use(express.bodyParser());
+
+app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
     res.setHeader('Content-Type', 'text/plain');
@@ -11,7 +13,7 @@ app.get('/', function(req, res) {
 
 app.post('/api/login', function(req, res) {
     res.setHeader('Content-Type', 'application/json')
-    if (request.body.email || request.body.password) {
+    if (req.body.email || req.body.password) {
         res.send('{\"token\": \"1234567890123456789012345678901234567890\"}');
     }
     res.status(400).send('')
@@ -19,7 +21,7 @@ app.post('/api/login', function(req, res) {
 
 app.post('/api/refreshToken', function(req, res) {
     res.setHeader('Content-Type', 'application/json')
-    if (request.body.token) {
+    if (req.body.token) {
        res.send("{\"token\": \"1234567890123456789012345678901234567890\"}")
     }
     res.status(400).send('')
@@ -27,7 +29,7 @@ app.post('/api/refreshToken', function(req, res) {
 
 app.post('/api/getLocation', function(req, res) {
     res.setHeader('Content-Type', 'application/json')
-    if (request.body.token) {
+    if (req.body.token) {
         res.send("{\"date\": \"\",\"location\": \"Salle 7\"}")
     }
     res.status(400).send('')
